@@ -175,12 +175,6 @@
   font-weight: 600;
 }
 
-.action-cell {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
 .edit-btn,
 .delete-btn {
   background: transparent;
