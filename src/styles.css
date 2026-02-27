@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+/*Global Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Segoe UI',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+/* Light Theme */
+:root {
+  --bg-color: #f0f2f5;
+  --card-bg: #ffffff;
+  --text-color: #1a1a2e;
+  --text-muted: #555555;
+  --label-color: #444444;
+  --border-color: #e0e0e0;
+  --input-bg: #ffffff;
+  --hover-bg: #fafafa;
+  --navbar-bg: #1a1a2e;
+  --navbar-text: #ffffff;
+}
+
+/* Dark Theme*/
+body.dark-theme {
+  --bg-color: #111122;
+  --card-bg: #1e1e32;
+  --text-color: #f0f0ff;
+  --text-muted: #b0b0cc;
+  --label-color: #d0d0e8;
+  --border-color: #33334d;
+  --input-bg: #28283e;
+  --hover-bg: #26263c;
+  --navbar-bg: #0c0c1a;
+  --navbar-text: #f0f0ff;
+}
+
+/* Dark-theme specific text*/
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme p,
+body.dark-theme label,
+body.dark-theme span,
+body.dark-theme td,
+body.dark-theme th {
+  color: var(--text-color);
+}
+
+body.dark-theme th {
+  background: var(--navbar-bg);
+  color: #f0f0ff;
+}
+
+body.dark-theme select option {
+  background: var(--input-bg);
+  color: var(--text-color);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}

@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <a class="brand" routerLink="/">&#9881; HardwareMarket</a>
+
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+    </li>
+    <li><a routerLink="/search" routerLinkActive="active">Search</a></li>
+    <li>
+      <a routerLink="/cart" routerLinkActive="active" class="cart-link">
+        Cart
+        @if (cart.totalCount() > 0) {
+          <span class="badge">{{ cart.totalCount() }}</span>
+        }
+      </a>
+    </li>
+
+    @if (auth.isAdmin()) {
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    }
+  </ul>
+
+  <div class="nav-actions">
+    <button
+      class="theme-btn"
+      (click)="theme.toggle()"
+      [title]="theme.isDark() ? 'Light Mode' : 'Dark Mode'"
+    >
+      {{ theme.isDark() ? '☀️' : '🌙' }}
+    </button>
+
+    @if (auth.isLoggedIn()) {
+      <span class="user-name">{{ auth.currentUser()?.name }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    } @else {
+      <a class="login-btn" routerLink="/login">Login</a>
+    }
+  </div>
+</nav>

@@ -1,0 +1,146 @@
+.search-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.page-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-color, #1a1a2e);
+}
+
+.search-bar {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border: 2px solid var(--border-color, #ddd);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+.search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.result-count {
+  color: var(--text-muted, #666);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-muted, #888);
+  padding: 40px;
+  font-size: 1.1rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.result-card {
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border-color, #eee);
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.result-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-img-link {
+  display: block;
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: var(--input-bg, #fafafa);
+  padding: 12px;
+}
+
+.card-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cat-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #e94560;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-title {
+  font-weight: 700;
+  color: var(--text-color, #1a1a2e);
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.card-title:hover {
+  color: #e94560;
+}
+
+.card-price {
+  font-weight: 700;
+  color: #e94560;
+  font-size: 1.05rem;
+  margin: 4px 0;
+}
+
+.add-btn {
+  padding: 10px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: #c73652;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted, #aaa);
+  font-size: 1.1rem;
+}

@@ -1,0 +1,50 @@
+<div class="search-page">
+  <h1 class="page-heading">Search Products</h1>
+
+  <div class="search-bar">
+    <input
+      type="search"
+      placeholder="Search by name or category..."
+      [value]="query()"
+      (input)="setQuery($any($event.target).value)"
+      class="search-input"
+      autofocus
+    />
+    <span class="search-icon">🔍</span>
+  </div>
+
+  @if (query() && results().length === 0) {
+    <p class="no-results">
+      No products found for "<strong>{{ query() }}</strong
+      >"
+    </p>
+  }
+
+  @if (results().length > 0) {
+    <p class="result-count">{{ results().length }} result(s) for "{{ query() }}"</p>
+
+    <div class="results-grid">
+      @for (p of results(); track p.id) {
+        <div class="result-card">
+          <a [routerLink]="['/product', p.id]" class="card-img-link">
+            <img [src]="p.thumbnail" [alt]="p.title" class="card-img" />
+          </a>
+          <div class="card-body">
+            <span class="cat-tag">{{ p.category }}</span>
+            <a [routerLink]="['/product', p.id]" class="card-title">{{ p.title }}</a>
+            <p class="card-price">{{ p.price | currency }}</p>
+            <button class="add-btn" (click)="addToCart(p)">
+              {{ added() === p.id ? '✔ Added' : 'Add to Cart' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (!query()) {
+    <div class="empty-state">
+      <p>Start typing to search for products...</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,80 @@
+<div class="form-overlay" (click)="cancel.emit()">
+  <div class="form-modal" (click)="$event.stopPropagation()">
+    <h2 class="form-title">{{ product ? 'Edit Product' : 'Add New Product' }}</h2>
+
+    <form (ngSubmit)="onSubmit()" #pForm="ngForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Title *</label>
+          <input
+            type="text"
+            [(ngModel)]="form.title"
+            name="title"
+            class="fc"
+            required
+            placeholder="Product name"
+          />
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <input
+            type="text"
+            [(ngModel)]="form.category"
+            name="category"
+            class="fc"
+            required
+            placeholder="e.g. laptops"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Price ($) *</label>
+          <input
+            type="number"
+            [(ngModel)]="form.price"
+            name="price"
+            class="fc"
+            required
+            min="0"
+            step="0.01"
+          />
+        </div>
+        <div class="form-group">
+          <label>Stock</label>
+          <input type="number" [(ngModel)]="form.stock" name="stock" class="fc" min="0" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Thumbnail URL</label>
+        <input
+          type="url"
+          [(ngModel)]="form.thumbnail"
+          name="thumbnail"
+          class="fc"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          [(ngModel)]="form.description"
+          name="description"
+          class="fc"
+          rows="3"
+          placeholder="Product description..."
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="save-btn" [disabled]="!form.title || !form.category">
+          {{ product ? 'Update' : 'Add Product' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

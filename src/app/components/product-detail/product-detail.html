@@ -1,0 +1,84 @@
+@if (product(); as p) {
+  <div class="detail-page">
+    <a routerLink="/" class="back-btn">← Back to Home</a>
+
+    <div class="detail-layout">
+      <!-- ─── LEFT: images ─────────────────── -->
+      <div class="images-section">
+        <div class="main-image-wrap">
+          <img [src]="selectedImage()" [alt]="p.title" class="main-image" />
+        </div>
+
+        @if (p.images && p.images.length > 1) {
+          <div class="thumb-row">
+            @for (img of p.images; track img) {
+              <img
+                [src]="img"
+                [alt]="p.title"
+                class="thumb"
+                [class.active]="img === selectedImage()"
+                (click)="selectImage(img)"
+              />
+            }
+          </div>
+        }
+      </div>
+
+      <!-- ─── RIGHT: info ──────────────────── -->
+      <div class="info-section">
+        <span class="category-badge">{{ p.category }}</span>
+        <h1 class="product-title">{{ p.title }}</h1>
+
+        <div class="rating-row">
+          <span class="stars">{{ stars(p.rating) }}</span>
+          <span class="rating-num">{{ p.rating | number: '1.1-1' }} / 5</span>
+        </div>
+
+        <p class="price">{{ p.price | currency }}</p>
+
+        <p class="description">{{ p.description }}</p>
+
+        <div class="stock-row">
+          @if (p.stock > 0) {
+            <span class="in-stock">✔ In Stock ({{ p.stock }} available)</span>
+          } @else {
+            <span class="out-stock">✖ Out of Stock</span>
+          }
+        </div>
+
+        <div class="qty-row">
+          <label>Quantity:</label>
+          <input type="number" [(ngModel)]="qty" min="1" [max]="p.stock" class="qty-input" />
+        </div>
+
+        <button class="add-cart-btn" [disabled]="p.stock === 0" (click)="addToCart()">
+          {{ addedToCart() ? '✔ Added!' : 'Add to Cart' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── REVIEWS ────────────────────────── -->
+    @if (p.reviews && p.reviews.length > 0) {
+      <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div class="reviews-grid">
+          @for (rev of p.reviews; track rev.reviewerName) {
+            <div class="review-card">
+              <div class="rev-header">
+                <span class="rev-name">{{ rev.reviewerName }}</span>
+                <span class="rev-stars">{{ stars(rev.rating) }}</span>
+              </div>
+              <p class="rev-comment">{{ rev.comment }}</p>
+              <span class="rev-date">{{ rev.date | date: 'mediumDate' }}</span>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </div>
+} @else {
+  <div class="loading-msg">
+    <div class="spinner"></div>
+    <p>Loading product...</p>
+  </div>
+}

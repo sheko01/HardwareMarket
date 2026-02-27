@@ -1,0 +1,86 @@
+<div class="dashboard-page">
+  <div class="dash-header">
+    <h1>Admin Dashboard</h1>
+    <button class="add-btn" (click)="openAdd()">+ Add Product</button>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <span class="stat-value">{{ productService.products().length }}</span>
+      <span class="stat-label">Total Products</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ productService.categories().length }}</span>
+      <span class="stat-label">Categories</span>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-bar">
+    <input
+      type="search"
+      placeholder="Filter products..."
+      [value]="searchQuery()"
+      (input)="searchQuery.set($any($event.target).value)"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of filtered(); track p.id) {
+          <tr>
+            <td>
+              <img [src]="p.thumbnail" [alt]="p.title" class="table-img" />
+            </td>
+            <td>
+              <a [routerLink]="['/product', p.id]" class="product-link">{{ p.title }}</a>
+            </td>
+            <td>
+              <span class="cat-badge">{{ p.category }}</span>
+            </td>
+            <td class="price-cell">{{ p.price | currency }}</td>
+            <td>
+              @if (p.stock > 0) {
+                <span class="in-stock">{{ p.stock }}</span>
+              } @else {
+                <span class="out-stock">0</span>
+              }
+            </td>
+            <td class="action-cell">
+              <button class="edit-btn" (click)="openEdit(p)" title="Edit">✏️</button>
+              <button class="delete-btn" (click)="delete(p.id)" title="Delete">🗑️</button>
+            </td>
+          </tr>
+        }
+
+        @if (filtered().length === 0) {
+          <tr>
+            <td colspan="6" class="no-data">No products found.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showForm()) {
+  <app-product-form
+    [product]="editingProduct()"
+    (save)="onSave($event)"
+    (cancel)="closeForm()"
+  ></app-product-form>
+}

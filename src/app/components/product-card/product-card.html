@@ -1,0 +1,27 @@
+@for (item of filteredList(); track item.id) {
+  <div class="card" appCardHover>
+    <a [routerLink]="['/product', item.id]" class="image-wrapper">
+      <img [src]="item.thumbnail" alt="product" class="product-image" />
+    </a>
+
+    <div class="card-content">
+      <a [routerLink]="['/product', item.id]" class="card-title-link">
+        <h3>{{ item.title }}</h3>
+      </a>
+
+      <p class="description">
+        {{ item.description | shorten: item.showFullDesc! }}
+
+        @if (!item.showFullDesc) {
+          <span class="dots" (click)="toggleDesc(item)">...</span>
+        } @else {
+          <span class="dots" (click)="toggleDesc(item)"> (show less)</span>
+        }
+      </p>
+
+      <div class="price">${{ item.price }}</div>
+
+      <button class="buy-btn" (click)="addToCart(item)">Add to Cart</button>
+    </div>
+  </div>
+}

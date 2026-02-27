@@ -1,0 +1,38 @@
+<main class="page-container">
+  <div class="controls-bar">
+    <div class="search-group">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        class="search-input"
+        placeholder="Search products..."
+        [value]="searchQuery()"
+        (input)="searchQuery.set($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label for="catSelect">Category:</label>
+      <select
+        id="catSelect"
+        [value]="selectedCatName()"
+        (change)="selectedCatName.set($any($event.target).value)"
+      >
+        <option value="">All</option>
+        @for (cat of productService.categories(); track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <section class="products">
+    <h2 class="section-title">Latest Products</h2>
+    <div class="product-grid">
+      <app-product-card
+        [recievedCat]="selectedCatName()"
+        [searchQuery]="searchQuery()"
+      ></app-product-card>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,17 @@
+<div class="slider-wrapper" (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
+  <div class="slider-container">
+    <img
+      [src]="hardwareImages[currentIndex].url"
+      [alt]="hardwareImages[currentIndex].altText"
+      class="slider-image"
+    />
+
+    <button class="nav-btn prev-btn" (click)="prev()">&#10094;</button>
+    <button class="nav-btn next-btn" (click)="next()">&#10095;</button>
+  </div>
+  <div class="slider-indicators">
+    @for (img of hardwareImages; track img.url; let i = $index) {
+      <div class="dot" [class.active]="i === currentIndex" (click)="goToSlide(i)"></div>
+    }
+  </div>
+</div>

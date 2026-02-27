@@ -1,0 +1,9 @@
+@if (productService.loading()) {
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Loading products...</p>
+  </div>
+}
+
+<app-slider></app-slider>
+<app-master-products></app-master-products>
